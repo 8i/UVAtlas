@@ -12,6 +12,11 @@
 #include "isochart.h"
 #include "isochartmesh.h"
 
+#ifdef __LINUX__
+#include <chrono>
+#include <thread>
+#endif
+
 using namespace DirectX;
 using namespace Isochart;
 
@@ -37,7 +42,9 @@ void IIsochartEngine::ReleaseIsochartEngine(
 
 CIsochartEngine::CIsochartEngine():
     m_state(ISOCHART_ST_UNINITILAIZED),
+#ifndef __LINUX__
     m_hMutex(nullptr),
+#endif
     m_dwOptions( _OPTION_ISOCHART_DEFAULT )
 {
 }
@@ -50,24 +57,31 @@ CIsochartEngine::~CIsochartEngine()
     {
 #if defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)
         // Busy-wait
+#elif defined(__LINUX__)
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
 #else
         SwitchToThread();
 #endif
     }
-    
+
+#ifndef __LINUX__
     if (m_hMutex)
     {
         CloseHandle(m_hMutex);
     }
+#endif
 }
 
 HRESULT CIsochartEngine::CreateEngineMutex()
 {
+#ifndef __LINUX__
     m_hMutex = CreateMutexEx(nullptr, nullptr, CREATE_MUTEX_INITIAL_OWNER, SYNCHRONIZE );
+
     if (!m_hMutex)
     {
         return HRESULT_FROM_WIN32(GetLastError());
     }
+#endif
     return S_OK;
 }
 // ------------------------------------------------------------------------
@@ -1679,8 +1693,12 @@ HRESULT CIsochartEngine::FillExportFaceAdjacencyBuffer(
 
 HRESULT CIsochartEngine::TryEnterExclusiveSection()
 {
-    // Other thread is using this object. 
+    // Other thread is using this object.
+#ifndef __LINUX__
     if (WaitForSingleObjectEx(m_hMutex, 0, FALSE) == WAIT_OBJECT_0)
+#else
+    if (m_hMutex.try_lock())
+#endif
     {
         return S_OK;
     }
@@ -1692,11 +1710,14 @@ HRESULT CIsochartEngine::TryEnterExclusiveSection()
 
 void  CIsochartEngine::LeaveExclusiveSection()
 {
+#ifndef __LINUX__
     if (m_hMutex)
     {
         ReleaseMutex(m_hMutex);
     }
-
+#else
+    m_hMutex.unlock();
+#endif
 }
 
 

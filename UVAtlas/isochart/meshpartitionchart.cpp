@@ -10,6 +10,10 @@
 #include "pch.h"
 #include "isochartmesh.h"
 
+#ifdef __LINUX__
+#include <cmath>
+#endif
+
 using namespace Isochart;
 using namespace DirectX;
 
@@ -1504,11 +1508,19 @@ HRESULT CIsochartMesh::ProcessPlaneLikeShape(
                     m_pVerts[vId2].uv.x = fLen2*x + m_pVerts[vId0].uv.x;
                     m_pVerts[vId2].uv.y = fLen2*y + m_pVerts[vId0].uv.y;
 
+#ifndef __LINUX__
                     assert(_finite(m_pVerts[vId2].uv.x) != 0 &&
                         _finite(m_pVerts[vId2].uv.y) != 0);
 
                     if (_finite(m_pVerts[vId2].uv.x) == 0 ||
                         _finite(m_pVerts[vId2].uv.y) == 0)
+#else
+                    assert(std::isfinite(m_pVerts[vId2].uv.x) &&
+                        std::isfinite(m_pVerts[vId2].uv.y));
+
+                    if (!std::isfinite(m_pVerts[vId2].uv.x) ||
+                        !std::isfinite(m_pVerts[vId2].uv.y))
+#endif
                     {
                         DPF(0, "ProcessPlaneLikeShape failed due to INFs");
                         return E_FAIL;

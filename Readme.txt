@@ -1,3 +1,12 @@
+This branch has a cmake project setup to support compilation of the UVAtlas library (not the tool) 
+on Windows x64 and Linux x64.
+
+Required Headers:
+    - UVAtlas.h
+    - JntLinuxTypes.h
+    - dxgiformat.h
+
+
 -----------------------------------
 UVAtlas - isochart texture atlasing
 -----------------------------------
