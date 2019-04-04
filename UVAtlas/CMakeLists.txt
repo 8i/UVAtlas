@@ -56,8 +56,9 @@ set (UVATLAS_HDR
     ${CMAKE_CURRENT_LIST_DIR}/isochart/UVAtlasRepacker.h
     ${CMAKE_CURRENT_LIST_DIR}/isochart/vertiter.h
     ${CMAKE_CURRENT_LIST_DIR}/isochart/Vis_Maxflow.h
+    ${CMAKE_CURRENT_LIST_DIR}/isochart/meshcommon.inl
     ${CMAKE_CURRENT_LIST_DIR}/maxheap.hpp
     ${CMAKE_CURRENT_LIST_DIR}/pch.h
     )
-	
+
 add_library(UVAtlas STATIC ${UVATLAS_SRC} ${UVATLAS_HDR})
