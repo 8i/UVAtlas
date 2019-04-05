@@ -51,8 +51,10 @@
 #define NOHELP
 #pragma warning(pop)
 
+#ifdef WIN32
 #include <windows.h>
 #include <objbase.h>
+#endif
 
 #include <assert.h>
 
@@ -71,12 +73,15 @@
 #include <vector>
 #include <queue>
 
+#ifdef WIN32
 #include <DirectXMath.h>
+#endif
 
-#include "UVAtlas.h"
+#include <UVAtlasTypes.h>
+#include <UVAtlas.h>
 
 #ifdef _DEBUG
-extern void __cdecl UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
+extern void CDECL UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
 #define DPF UVAtlasDebugPrintf
 #else
 #define DPF(l,s,...)
