@@ -8,6 +8,7 @@
 
 #ifdef __LINUX__
 
+#define _Use_decl_annotations_
 #define _In_
 #define _In_opt_
 #define _In_z_
@@ -22,7 +23,7 @@
 #define _Inout_opt_
 #define _When_(expr, annotes)
 #define _Printf_format_string_
-
+#define _Analysis_assume_(expr)
 #define __in_ecount(size)
 #define __out_ecount(size)
 
@@ -38,6 +39,7 @@ typedef long HRESULT;
 #define E_OUTOFMEMORY                    ((HRESULT)0x8007000EL)
 #define S_OK                             ((HRESULT)0L)
 #define E_FAIL                           ((HRESULT)0x80004005L)
+#define E_INVALIDARG                     ((HRESULT)0x80070057L)
 
 #define FAILED(hr) (((HRESULT)(hr)) < 0)
 
@@ -45,6 +47,9 @@ typedef long HRESULT;
 #define STDMETHOD(method) virtual __attribute__((nothrow,stdcall)) HRESULT method
 #define STDMETHODIMP HRESULT __attribute__((stdcall))
 #define PURE = 0
+#define UNREFERENCED_PARAMETER(P) (P)
+
+
 typedef unsigned long DWORD;
 typedef const char* LPCSTR;
 typedef void* HANDLE;
@@ -410,6 +415,29 @@ inline XMVECTOR XM_CALLCONV XMVector3Cross
             0.0f
         } } };
     return vResult.v;
+}
+
+//------------------------------------------------------------------------------
+
+inline XMVECTOR XM_CALLCONV XMVector2LengthSq
+(
+    FXMVECTOR V
+)
+{
+    return XMVector2Dot(V, V);
+}
+
+//------------------------------------------------------------------------------
+
+inline XMVECTOR XM_CALLCONV XMVector2Length
+(
+    FXMVECTOR V
+)
+{
+    XMVECTOR Result;
+    Result = XMVector2LengthSq(V);
+    Result = XMVectorSqrt(Result);
+    return Result;
 }
 
 //------------------------------------------------------------------------------
