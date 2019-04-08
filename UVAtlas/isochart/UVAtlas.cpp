@@ -1828,6 +1828,7 @@ HRESULT CDECL DirectX::UVAtlasApplyRemap(
 _Use_decl_annotations_
 void CDECL UVAtlasDebugPrintf(unsigned int lvl, LPCSTR szFormat, ...)
 {
+#ifdef WIN32
     if (lvl > 0)
     {
         // Change this to see more verbose messages...
@@ -1848,5 +1849,8 @@ void CDECL UVAtlasDebugPrintf(unsigned int lvl, LPCSTR szFormat, ...)
     strB[4095] = '\0';
 
     OutputDebugStringA(strB);
+#else
+    //TODO[KV]: Implement linux friendly logging
+#endif
 }
 #endif // _DEBUG

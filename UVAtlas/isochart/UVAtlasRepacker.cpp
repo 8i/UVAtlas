@@ -9,8 +9,12 @@
 
 #include "pch.h"
 
-#include "uvatlasrepacker.h"
+#include "UVAtlasRepacker.h"
 #include "UVAtlas.h"
+
+#ifndef WIN32
+#include <cstddef>
+#endif
 
 using namespace DirectX;
 using namespace Isochart;

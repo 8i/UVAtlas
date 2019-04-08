@@ -67,6 +67,10 @@
 #include "isochartmesh.h"
 #include "maxheap.hpp"
 
+#ifndef WIN32
+#include <cmath>
+#endif
+
 // VECTOR field selector
 // v can be a XMFLOAT2 or XMFLOAT3 variable
 // axis = XAxis, return v.x
@@ -3398,9 +3402,13 @@ void CIsochartMesh::NormalizeAtlas(
             pVertex->uv.x = (pVertex->uv.x - atlasInfo.fBoxLeft) / fScaleW;
             pVertex->uv.y = (pVertex->uv.y - atlasInfo.fBoxBottom)/ fScaleH;
 
+#ifdef WIN32
             assert(_finite(pVertex->uv.x));
             assert(_finite(pVertex->uv.y));
-
+#else
+            assert(std::isfinite(pVertex->uv.x));
+            assert(std::isfinite(pVertex->uv.y));
+#endif
             if (pVertex->uv.x < 0.0f)
             {
                 pVertex->uv.x = 0.0f;
@@ -3458,8 +3466,11 @@ void CIsochartMesh::OptimizeAtlasSignalStretch(
         pChart->m_fChart2DArea = pChart->CalculateChart2DArea();
         fTotal2DArea += pChart->m_fChart2DArea;
 
+#ifdef WIN32
         assert(_finite(pChart->m_fParamStretchL2) != 0);
-
+#else
+        assert(std::isfinite(pChart->m_fParamStretchL2));
+#endif
         fTotal += IsochartSqrtf(
             (pChart->m_fParamStretchL2+ShiftError)*pChart->m_fChart2DArea);
     }
@@ -3492,7 +3503,11 @@ void CIsochartMesh::OptimizeAtlasSignalStretch(
 
         pChart->ScaleChart(fScale);
 
+#ifdef WIN32
         assert(_finite(pChart->m_fParamStretchL2) != 0);
+#else
+        assert(std::isfinite(pChart->m_fParamStretchL2));
+#endif
     }
 }
 

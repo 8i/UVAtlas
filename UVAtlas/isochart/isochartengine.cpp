@@ -58,7 +58,7 @@ CIsochartEngine::~CIsochartEngine()
 #if defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)
         // Busy-wait
 #elif !defined(WIN32)
-        std::this_thread::sleep_for(std::chrono::millisecons(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
 #else
         SwitchToThread();
 #endif

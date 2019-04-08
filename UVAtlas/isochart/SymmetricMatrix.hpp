@@ -15,6 +15,10 @@
 
 #pragma once
 
+#ifndef WIN32
+#include <cmath>
+#endif
+
 namespace Isochart
 {
     template<class TYPE>
@@ -43,7 +47,11 @@ namespace Isochart
             value_type scale,
             size_t dwDimension)
         {
+#ifdef WIN32
             assert(_finite(scale) != 0);
+#else
+            assert(std::isfinite(scale));
+#endif
             for (size_t ii=0; ii<dwDimension; ii++)
             {
                 v[ii] *= scale;
