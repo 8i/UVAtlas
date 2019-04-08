@@ -40,6 +40,8 @@ typedef long HRESULT;
 #define S_OK                             ((HRESULT)0L)
 #define E_FAIL                           ((HRESULT)0x80004005L)
 #define E_INVALIDARG                     ((HRESULT)0x80070057L)
+#define E_UNEXPECTED                     ((HRESULT)0x8000FFFFL)
+#define E_ABORT                          ((HRESULT)0x80004004L)
 
 #define FAILED(hr) (((HRESULT)(hr)) < 0)
 
