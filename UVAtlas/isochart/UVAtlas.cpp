@@ -566,7 +566,7 @@ namespace
 
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasPartition(
+HRESULT _CDECL DirectX::UVAtlasPartition(
     const XMFLOAT3* positions,
     size_t nVerts,
     const void* indices,
@@ -577,7 +577,7 @@ HRESULT CDECL DirectX::UVAtlasPartition(
     const uint32_t *adjacency,
     const uint32_t *falseEdgeAdjacency,
     const float *pIMTArray,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float callbackFrequency,
     DWORD options,
     std::vector<UVAtlasVertex>& vMeshOutVertexBuffer,
@@ -617,7 +617,7 @@ HRESULT CDECL DirectX::UVAtlasPartition(
 
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasPack(
+HRESULT _CDECL DirectX::UVAtlasPack(
     std::vector<UVAtlasVertex>& vMeshVertexBuffer,
     std::vector<uint8_t>& vMeshIndexBuffer,
     DXGI_FORMAT indexFormat,
@@ -625,7 +625,7 @@ HRESULT CDECL DirectX::UVAtlasPack(
     size_t height,
     float gutter,
     const std::vector<uint32_t>& vPartitionResultAdjacency,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float callbackFrequency)
 {    
     return UVAtlasPackInt(vMeshVertexBuffer,
@@ -644,7 +644,7 @@ HRESULT CDECL DirectX::UVAtlasPack(
 
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasCreate(
+HRESULT _CDECL DirectX::UVAtlasCreate(
     const XMFLOAT3* positions,
     size_t nVerts,
     const void* indices,
@@ -658,7 +658,7 @@ HRESULT CDECL DirectX::UVAtlasCreate(
     const uint32_t *adjacency,
     const uint32_t *falseEdgeAdjacency,
     const float *pIMTArray,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float callbackFrequency,
     DWORD options,
     std::vector<UVAtlasVertex>& vMeshOutVertexBuffer,
@@ -723,7 +723,7 @@ HRESULT CDECL DirectX::UVAtlasCreate(
 
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasComputeIMTFromPerVertexSignal(
+HRESULT _CDECL DirectX::UVAtlasComputeIMTFromPerVertexSignal(
     const XMFLOAT3* positions,
     size_t nVerts,
     const void* indices,
@@ -732,7 +732,7 @@ HRESULT CDECL DirectX::UVAtlasComputeIMTFromPerVertexSignal(
     const float *pVertexSignal,
     size_t signalDimension,
     size_t signalStride,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float* pIMTArray)
 {
     if (!positions || !nVerts || !indices || !nFaces || !pVertexSignal || !pIMTArray)
@@ -843,7 +843,7 @@ HRESULT CDECL DirectX::UVAtlasComputeIMTFromPerVertexSignal(
 
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasComputeIMTFromSignal(
+HRESULT _CDECL DirectX::UVAtlasComputeIMTFromSignal(
     const XMFLOAT3* positions,
     const XMFLOAT2* texcoords,
     size_t nVerts,
@@ -852,9 +852,9 @@ HRESULT CDECL DirectX::UVAtlasComputeIMTFromSignal(
     size_t nFaces,
     size_t signalDimension,
     float maxUVDistance,
-    std::function<HRESULT CDECL(const DirectX::XMFLOAT2 *uv, size_t primitiveID, size_t signalDimension, void* userData, float* signalOut)> signalCallback,
+    std::function<HRESULT _CDECL(const DirectX::XMFLOAT2 *uv, size_t primitiveID, size_t signalDimension, void* userData, float* signalOut)> signalCallback,
     void *userData,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float* pIMTArray)
 {
     if (!positions || !texcoords || !nVerts || !indices || !nFaces || !pIMTArray)
@@ -964,7 +964,7 @@ namespace
         size_t uHeight, uWidth;
     };
 
-    HRESULT CDECL IMTTextureCbWrapNone(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTTextureCbWrapNone(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1026,7 +1026,7 @@ namespace
         return S_OK;
     }
 
-    HRESULT CDECL IMTTextureCbWrapU(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTTextureCbWrapU(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1092,7 +1092,7 @@ namespace
         return S_OK;
     }
 
-    HRESULT CDECL IMTTextureCbWrapV(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTTextureCbWrapV(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1158,7 +1158,7 @@ namespace
         return S_OK;
     }
 
-    HRESULT CDECL IMTTextureCbWrapUV(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTTextureCbWrapUV(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1229,7 +1229,7 @@ namespace
 }
 
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasComputeIMTFromTexture(
+HRESULT _CDECL DirectX::UVAtlasComputeIMTFromTexture(
     const XMFLOAT3* positions,
     const XMFLOAT2* texcoords,
     size_t nVerts,
@@ -1240,7 +1240,7 @@ HRESULT CDECL DirectX::UVAtlasComputeIMTFromTexture(
     size_t width,
     size_t height,
     DWORD options,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float* pIMTArray)
 {
     if (!positions || !texcoords || !nVerts || !indices || !nFaces || !pTexture || !pIMTArray)
@@ -1369,7 +1369,7 @@ namespace
         size_t uHeight, uWidth, uStride;
     };
 
-    HRESULT CDECL IMTFloatArrayCbWrapNone(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTFloatArrayCbWrapNone(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1430,7 +1430,7 @@ namespace
         return S_OK;
     }
 
-    HRESULT CDECL IMTFloatArrayCbWrapU(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTFloatArrayCbWrapU(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1495,7 +1495,7 @@ namespace
         return S_OK;
     }
 
-    HRESULT CDECL IMTFloatArrayCbWrapV(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTFloatArrayCbWrapV(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1560,7 +1560,7 @@ namespace
         return S_OK;
     }
 
-    HRESULT CDECL IMTFloatArrayCbWrapUV(const XMFLOAT2 *uv,
+    HRESULT _CDECL IMTFloatArrayCbWrapUV(const XMFLOAT2 *uv,
         size_t uPrimitiveId,
         size_t uSignalDimension,
         void *pUserData,
@@ -1630,7 +1630,7 @@ namespace
 }
 
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasComputeIMTFromPerTexelSignal(
+HRESULT _CDECL DirectX::UVAtlasComputeIMTFromPerTexelSignal(
     const XMFLOAT3* positions,
     const XMFLOAT2* texcoords,
     size_t nVerts,
@@ -1643,7 +1643,7 @@ HRESULT CDECL DirectX::UVAtlasComputeIMTFromPerTexelSignal(
     size_t signalDimension,
     size_t nComponents,
     DWORD options,
-    std::function<HRESULT CDECL(float percentComplete)> statusCallBack,
+    std::function<HRESULT _CDECL(float percentComplete)> statusCallBack,
     float* pIMTArray)
 {
     if (!positions || !texcoords || !nVerts || !indices || !nFaces || !pTexelSignal || !pIMTArray)
@@ -1774,7 +1774,7 @@ HRESULT CDECL DirectX::UVAtlasComputeIMTFromPerTexelSignal(
 
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
-HRESULT CDECL DirectX::UVAtlasApplyRemap(
+HRESULT _CDECL DirectX::UVAtlasApplyRemap(
     const void* vbin,
     size_t stride,
     size_t nVerts,
@@ -1826,7 +1826,7 @@ HRESULT CDECL DirectX::UVAtlasApplyRemap(
 //-------------------------------------------------------------------------------------
 #ifdef _DEBUG
 _Use_decl_annotations_
-void CDECL UVAtlasDebugPrintf(unsigned int lvl, LPCSTR szFormat, ...)
+void _CDECL UVAtlasDebugPrintf(unsigned int lvl, LPCSTR szFormat, ...)
 {
 #ifdef WIN32
     if (lvl > 0)

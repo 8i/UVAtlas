@@ -29,8 +29,8 @@ namespace Isochart
 typedef float FLOAT3[IMT_DIM]; // Used to define IMT matrix
 
 // User-specified callback. Return E_FAIL to abort ongoing task
-typedef std::function<HRESULT CDECL(float percentComplete)> LPISOCHARTCALLBACK;
-typedef std::function<HRESULT CDECL(const DirectX::XMFLOAT2 *uv, size_t primitiveID, size_t signalDimension, void* userData, float* signalOut)> LPIMTSIGNALCALLBACK;
+typedef std::function<HRESULT _CDECL(float percentComplete)> LPISOCHARTCALLBACK;
+typedef std::function<HRESULT _CDECL(const DirectX::XMFLOAT2 *uv, size_t primitiveID, size_t signalDimension, void* userData, float* signalOut)> LPIMTSIGNALCALLBACK;
 
 // isochart options
 enum ISOCHARTOPTION 
