@@ -8,6 +8,8 @@
 
 #if defined(__LINUX__) || defined(_PSY_LINUX_)
 
+#include <dxgiformat.h>
+
 #define _Use_decl_annotations_
 #define _In_
 #define _In_opt_

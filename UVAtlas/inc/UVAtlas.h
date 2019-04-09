@@ -17,11 +17,12 @@
 #define DCOMMON_H_INCLUDED
 #else
 #include <windows.h>
+#include <dxgiformat.h>
 #endif
 
 #include <DirectXMath.h>
 #endif
-#include <dxgiformat.h>
+
 #include <UVAtlasTypes.h>
 
 #include <functional>

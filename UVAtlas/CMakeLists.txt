@@ -7,11 +7,6 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/inc)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/geodesics)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/isochart)
 
-if (UNIX)
-add_definitions(-D__LINUX__)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/linux)
-endif()
-
 set (UVATLAS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/geodesics/ApproximateOneToAll.cpp
     ${CMAKE_CURRENT_LIST_DIR}/geodesics/ExactOneToAll.cpp
@@ -66,5 +61,6 @@ set (UVATLAS_HDR
     ${CMAKE_CURRENT_LIST_DIR}/maxheap.hpp
     ${CMAKE_CURRENT_LIST_DIR}/pch.h
     )
-#include(${CMAKE_USER_MAKE_RULES_OVERRIDE}) 
+
 add_library(UVAtlas STATIC ${UVATLAS_SRC} ${UVATLAS_HDR})
+
