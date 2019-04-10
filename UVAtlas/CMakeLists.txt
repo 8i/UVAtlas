@@ -41,7 +41,7 @@ set (UVATLAS_HDR
     ${CMAKE_CURRENT_LIST_DIR}/geodesics/mathutils.h
     ${CMAKE_CURRENT_LIST_DIR}/geodesics/minheap.hpp
     ${CMAKE_CURRENT_LIST_DIR}/inc/UVAtlas.h
-    ${CMAKE_CURRENT_LIST_DIR}/inc/UVAtlasTypes.h
+    ${CMAKE_CURRENT_LIST_DIR}/inc/JntLinuxTypes.h
     ${CMAKE_CURRENT_LIST_DIR}/isochart/basemeshinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/isochart/callbackschemer.h
     ${CMAKE_CURRENT_LIST_DIR}/isochart/graphcut.h

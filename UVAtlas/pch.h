@@ -77,7 +77,7 @@
 #include <DirectXMath.h>
 #endif
 
-#include <UVAtlasTypes.h>
+#include <JntLinuxTypes.h>
 #include <UVAtlas.h>
 
 #ifdef _DEBUG
