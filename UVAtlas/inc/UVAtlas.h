@@ -11,7 +11,7 @@
 
 #include <stdint.h>
 
-#ifndef __LINUX__
+#if !defined(__LINUX__) && !defined(_PSY_LINUX_)
 #if defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d11_x.h>
 #define DCOMMON_H_INCLUDED
