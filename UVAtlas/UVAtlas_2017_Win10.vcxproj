@@ -132,7 +132,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>Bin\Desktop_2017_Win10\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\Desktop_2017_Win10\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>UVAtlas-debug</TargetName>
+    <TargetName>UVAtlasd</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Bin\Desktop_2017_Win10\$(Platform)\$(Configuration)\</OutDir>
