@@ -1,9 +1,9 @@
 cmake_minimum_required (VERSION 3.13.1)
 
-project(atlas)
+project(UVAtlas)
 
 if (NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Debug")
+    set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
 set(CMAKE_DEBUG_POSTFIX d)
@@ -15,6 +15,7 @@ if (WIN32)
     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${CXX_COMMON_FLAGS}")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${CXX_COMMON_FLAGS}")
 
+    #    UVAtlas is too slow in debug so use optimization flags to speed up
     string(REPLACE "/Od" "/O2" CMAKE_C_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
     string(REPLACE "/Ob0" "" CMAKE_C_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
     string(REPLACE "/RTC1" "" CMAKE_C_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
@@ -36,4 +37,3 @@ endif()
 add_definitions(-D_UNICODE -DUNICODE)
 
 add_subdirectory(UVAtlas)
-

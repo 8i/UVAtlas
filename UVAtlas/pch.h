@@ -51,7 +51,7 @@
 #define NOHELP
 #pragma warning(pop)
 
-#ifdef WIN32
+#ifndef __LINUX__
 #include <windows.h>
 #include <objbase.h>
 #endif
@@ -73,7 +73,7 @@
 #include <vector>
 #include <queue>
 
-#ifdef WIN32
+#ifndef __LINUX__
 #include <DirectXMath.h>
 #endif
 

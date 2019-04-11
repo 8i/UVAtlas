@@ -67,7 +67,7 @@
 #include "isochartmesh.h"
 #include "maxheap.hpp"
 
-#ifndef WIN32
+#ifdef __LINUX__
 #include <cmath>
 #endif
 
@@ -3402,7 +3402,7 @@ void CIsochartMesh::NormalizeAtlas(
             pVertex->uv.x = (pVertex->uv.x - atlasInfo.fBoxLeft) / fScaleW;
             pVertex->uv.y = (pVertex->uv.y - atlasInfo.fBoxBottom)/ fScaleH;
 
-#ifdef WIN32
+#ifndef __LINUX__
             assert(_finite(pVertex->uv.x));
             assert(_finite(pVertex->uv.y));
 #else
@@ -3466,7 +3466,7 @@ void CIsochartMesh::OptimizeAtlasSignalStretch(
         pChart->m_fChart2DArea = pChart->CalculateChart2DArea();
         fTotal2DArea += pChart->m_fChart2DArea;
 
-#ifdef WIN32
+#ifndef __LINUX__
         assert(_finite(pChart->m_fParamStretchL2) != 0);
 #else
         assert(std::isfinite(pChart->m_fParamStretchL2));
@@ -3503,7 +3503,7 @@ void CIsochartMesh::OptimizeAtlasSignalStretch(
 
         pChart->ScaleChart(fScale);
 
-#ifdef WIN32
+#ifndef __LINUX__
         assert(_finite(pChart->m_fParamStretchL2) != 0);
 #else
         assert(std::isfinite(pChart->m_fParamStretchL2));

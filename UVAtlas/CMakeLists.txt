@@ -63,4 +63,7 @@ set (UVATLAS_HDR
     )
 
 add_library(UVAtlas STATIC ${UVATLAS_SRC} ${UVATLAS_HDR})
-
+set_target_properties(UVAtlas PROPERTIES
+                      COMPILE_PDB_NAME "UVAtlas"
+                      COMPILE_PDB_NAME_DEBUG "UVAtlas${CMAKE_DEBUG_POSTFIX}"
+                      )

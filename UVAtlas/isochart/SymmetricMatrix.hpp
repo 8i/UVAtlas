@@ -15,7 +15,7 @@
 
 #pragma once
 
-#ifndef WIN32
+#ifdef __LINUX__
 #include <cmath>
 #endif
 
@@ -47,7 +47,7 @@ namespace Isochart
             value_type scale,
             size_t dwDimension)
         {
-#ifdef WIN32
+#ifndef __LINUX__
             assert(_finite(scale) != 0);
 #else
             assert(std::isfinite(scale));

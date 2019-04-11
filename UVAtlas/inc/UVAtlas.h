@@ -11,7 +11,7 @@
 
 #include <stdint.h>
 
-#ifdef WIN32
+#ifndef __LINUX__
 #if defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d11_x.h>
 #define DCOMMON_H_INCLUDED

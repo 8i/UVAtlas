@@ -12,7 +12,7 @@
 #include "UVAtlasRepacker.h"
 #include "UVAtlas.h"
 
-#ifndef WIN32
+#ifdef __LINUX__
 #include <cstddef>
 #endif
 

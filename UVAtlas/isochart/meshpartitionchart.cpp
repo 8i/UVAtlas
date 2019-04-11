@@ -10,7 +10,7 @@
 #include "pch.h"
 #include "isochartmesh.h"
 
-#ifndef WIN32
+#ifdef __LINUX__
 #include <cmath>
 #endif
 
@@ -1508,7 +1508,7 @@ HRESULT CIsochartMesh::ProcessPlaneLikeShape(
                     m_pVerts[vId2].uv.x = fLen2*x + m_pVerts[vId0].uv.x;
                     m_pVerts[vId2].uv.y = fLen2*y + m_pVerts[vId0].uv.y;
 
-#ifdef WIN32
+#ifndef __LINUX__
                     assert(_finite(m_pVerts[vId2].uv.x) != 0 &&
                         _finite(m_pVerts[vId2].uv.y) != 0);
 
