@@ -81,7 +81,7 @@
 #include <UVAtlas.h>
 
 #ifdef _DEBUG
-extern void _CDECL UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
+extern void JNT_CDECL UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
 #define DPF UVAtlasDebugPrintf
 #else
 #define DPF(l,s,...)
