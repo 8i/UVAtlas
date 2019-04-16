@@ -13,6 +13,9 @@
 #include "callbackschemer.h"
 #include "maxheap.hpp"
 
+#ifdef __LINUX__
+#include <mutex>
+#endif
 
 namespace Isochart
 {
@@ -235,9 +238,12 @@ private:
     size_t dwExpectChartCount;
 
     EngineState m_state;	// Indicate internal state.
-    
-    HANDLE m_hMutex;	// Mutex 
 
+#ifndef __LINUX__
+    HANDLE m_hMutex;	// Mutex
+#else
+    std::mutex m_hMutex;
+#endif
     DWORD m_dwOptions ;
 
     friend CIsochartMesh ;

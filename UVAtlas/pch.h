@@ -51,8 +51,10 @@
 #define NOHELP
 #pragma warning(pop)
 
+#ifndef __LINUX__
 #include <windows.h>
 #include <objbase.h>
+#endif
 
 #include <assert.h>
 
@@ -71,12 +73,15 @@
 #include <vector>
 #include <queue>
 
+#ifndef __LINUX__
 #include <DirectXMath.h>
+#endif
 
-#include "UVAtlas.h"
+#include <JntLinuxTypes.h>
+#include <UVAtlas.h>
 
 #ifdef _DEBUG
-extern void __cdecl UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
+extern void JNT_CDECL UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
 #define DPF UVAtlasDebugPrintf
 #else
 #define DPF(l,s,...)
