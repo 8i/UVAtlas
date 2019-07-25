@@ -10,6 +10,7 @@
 #pragma once
 
 #include "isochartconfig.h"
+#include <cmath>
 
 #define FAILURE_RETURN(x) if (FAILED( hr =(x))) return hr
 #define FAILURE_GOTO_END(x) if (FAILED( hr =(x))) goto LEnd
@@ -45,7 +46,7 @@ inline bool IsInZeroRange2(
 
 inline float IsochartSqrtf(float a)
 {
-    if (a < 0)
+    if (a < 0 || std::isnan(a))
     {
         return 0;
     }
@@ -54,7 +55,7 @@ inline float IsochartSqrtf(float a)
 
 inline double IsochartSqrt(double a)
 {
-    if (a < 0)
+    if (a < 0 || std::isnan(a))
     {
         return 0;
     }
