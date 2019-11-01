@@ -8,7 +8,7 @@
 //-------------------------------------------------------------------------------------
 
 #include "pch.h"
-#include "UVAtlas.h"
+#include "UVAtlas/UVAtlas.h"
 #include "isochart.h"
 #include "UVAtlasRepacker.h"
 

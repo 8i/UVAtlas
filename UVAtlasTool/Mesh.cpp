@@ -26,7 +26,7 @@
 
 #include <DirectXPackedVector.h>
 #include <DirectXCollision.h>
-#include <UVAtlas.h>
+#include <UVAtlas/UVAtlas.h>
 
 using namespace DirectX;
 

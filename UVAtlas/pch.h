@@ -77,8 +77,8 @@
 #include <DirectXMath.h>
 #endif
 
-#include <JntLinuxTypes.h>
-#include <UVAtlas.h>
+#include <UVAtlas/JntLinuxTypes.h>
+#include <UVAtlas/UVAtlas.h>
 
 #ifdef _DEBUG
 extern void JNT_CDECL UVAtlasDebugPrintf(unsigned int lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);

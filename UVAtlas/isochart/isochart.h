@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "UVAtlas.h"
+#include "UVAtlas/UVAtlas.h"
 #include "isochartconfig.h"
 
 // Isochart API for one-pass charting

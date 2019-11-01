@@ -40,7 +40,7 @@
 
 #include "pch.h"
 #include "isochartmesh.h"
-#include "UVAtlas.h"
+#include "UVAtlas/UVAtlas.h"
 #include "maxheap.hpp"
 
 using namespace Isochart;

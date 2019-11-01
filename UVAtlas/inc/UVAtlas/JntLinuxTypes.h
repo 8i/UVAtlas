@@ -8,12 +8,12 @@
 
 #if defined(__LINUX__) || defined(_PSY_LINUX_)
 
-#include <dxgiformat.h>
-#include <wchar.h>
+#include <UVAtlas/dxgiformat.h>
+#include <assert.h>
 #include <cstdarg>
 #include <cstdint>
-#include <assert.h>
 #include <math.h>
+#include <wchar.h>
 
 //Sal annotations
 #define _Use_decl_annotations_
