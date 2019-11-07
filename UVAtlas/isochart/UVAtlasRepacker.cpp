@@ -10,7 +10,7 @@
 #include "pch.h"
 
 #include "UVAtlasRepacker.h"
-#include "UVAtlas.h"
+#include "UVAtlas/UVAtlas.h"
 
 #ifdef __LINUX__
 #include <cstddef>

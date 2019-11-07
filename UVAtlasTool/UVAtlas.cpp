@@ -30,7 +30,7 @@
 #include <memory>
 #include <list>
 
-#include <dxgiformat.h>
+#include <UVAtlas/dxgiformat.h>
 
 #include "uvatlas.h"
 #include "directxtex.h"

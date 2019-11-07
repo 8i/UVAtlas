@@ -23,7 +23,7 @@
 #include <DirectXMath.h>
 #endif
 
-#include <JntLinuxTypes.h>
+#include <UVAtlas/JntLinuxTypes.h>
 
 #include <functional>
 #include <vector>
