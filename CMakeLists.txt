@@ -28,6 +28,7 @@ option(UVATLAS_USE_OPENMP "Build with OpenMP support" ON)
 
 # Enable use of the Eigen and BLAS libraries (https://eigen.tuxfamily.org/)
 option(ENABLE_USE_EIGEN "Use the Eigen & BLAS libraries" OFF)
+set(ENABLE_USE_EIGEN ON)
 
 option(ENABLE_CODE_ANALYSIS "Use Static Code Analysis on build" OFF)
 
@@ -124,6 +125,8 @@ endif()
 
 if ((NOT WIN32) OR VCPKG_TOOLCHAIN)
     message("INFO: Using VCPKG for DirectX-Headers and DirectXMath.")
+    list(APPEND CMAKE_PREFIX_PATH "/home/kiran/repos/DirectX-Headers/build/redist")
+    list(APPEND CMAKE_PREFIX_PATH "/home/kiran/repos/DirectXMath/build/redist")
     find_package(directx-headers CONFIG REQUIRED)
     find_package(directxmath CONFIG REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectX-Headers Microsoft::DirectXMath)
@@ -132,6 +135,7 @@ endif()
 
 if (ENABLE_USE_EIGEN)
     message("INFO: Using Eigen3 & Spectra for CSymmetricMatrix::GetEigen.")
+    list(APPEND CMAKE_PREFIX_PATH "/home/kiran/repos/spectra/build/redist")
     find_package(Eigen3 REQUIRED)
     find_package(spectra REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE Eigen3::Eigen Spectra::Spectra)
