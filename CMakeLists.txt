@@ -129,8 +129,11 @@ if ((NOT WIN32) OR VCPKG_TOOLCHAIN)
     list(APPEND CMAKE_PREFIX_PATH "/home/kiran/repos/DirectXMath/build/redist")
     find_package(directx-headers CONFIG REQUIRED)
     find_package(directxmath CONFIG REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectX-Headers Microsoft::DirectXMath)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectX-Headers Microsoft::DirectXMath easy_profiler)
     target_compile_definitions(${PROJECT_NAME} PRIVATE USING_DIRECTX_HEADERS)
+
+#    find_package(OpenMP)
+#    target_compile_options(${PROJECT_NAME} PRIVATE -fopenmp=libomp)
 endif()
 
 if (ENABLE_USE_EIGEN)

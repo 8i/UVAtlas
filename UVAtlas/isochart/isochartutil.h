@@ -10,6 +10,7 @@
 #pragma once
 
 #include "isochartconfig.h"
+#include <DirectXMath.h>
 
 #define FAILURE_RETURN(x) if (FAILED( hr =(x))) return hr
 #define FAILURE_GOTO_END(x) if (FAILED( hr =(x))) goto LEnd
@@ -243,7 +244,7 @@ namespace Isochart
         }
     }
 
-    inline void Compute2DtoNDPartialDerivatives(
+    void Compute2DtoNDPartialDerivatives(
         float fNew2DArea,
         const DirectX::XMFLOAT2* pv2D0,
         const DirectX::XMFLOAT2* pv2D1,
@@ -253,43 +254,95 @@ namespace Isochart
         __in_ecount(dwDimensonN) const float* pfND2,
         size_t dwDimensonN,
         __out_ecount(dwDimensonN) float* Ss,
-        __out_ecount(dwDimensonN) float* St)
-    {
-        assert(!IsInZeroRange2(fNew2DArea));
-
-        float q[3];
-        for (size_t ii = 0; ii < dwDimensonN; ii++)
-        {
-            q[0] = pfND0[ii];
-            q[1] = pfND1[ii];
-            q[2] = pfND2[ii];
-
-            if (!IsInZeroRange2(fNew2DArea))
-            {
-                Ss[ii] = (q[0] * (pv2D1->y - pv2D2->y) +
-                    q[1] * (pv2D2->y - pv2D0->y) +
-                    q[2] * (pv2D0->y - pv2D1->y)) / (fNew2DArea * 2);
-
-                St[ii] = (q[0] * (pv2D2->x - pv2D1->x) +
-                    q[1] * (pv2D0->x - pv2D2->x) +
-                    q[2] * (pv2D1->x - pv2D0->x)) / (fNew2DArea * 2);
-
-            }
-            else
-            {
-                if (q[0] == q[1] && q[0] == q[2])
-                {
-                    Ss[ii] = St[ii] = 0;
-                }
-                else
-                {
-                    Ss[ii] = St[ii] = FLT_MAX;
-                }
-            }
-        }
-
-        return;
-    }
+        __out_ecount(dwDimensonN) float* St);
+//    {
+//        assert(!IsInZeroRange2(fNew2DArea));
+//
+//#ifndef _XM_SSE_INTRINSICS_
+//        DirectX::XMVECTOR y1 = _mm_set_ps(0.f, pv2D0->y, pv2D2->y, pv2D1->y);
+//        DirectX::XMVECTOR y2 = _mm_set_ps(0.f, pv2D1->y, pv2D0->y, pv2D2->y);
+//
+//        DirectX::XMVECTOR x1 = _mm_set_ps(0.f, pv2D1->x, pv2D0->x, pv2D2->x);
+//        DirectX::XMVECTOR x2 = _mm_set_ps(0.f, pv2D0->x, pv2D2->x, pv2D1->x);
+//
+//        y1 = _mm_sub_ps(y1, y2);
+//        x1 = _mm_sub_ps(x1, x2);
+//
+//        const DirectX::XMVECTOR inv_area = _mm_set1_ps(1.f / (fNew2DArea * 2.f));
+//        y1 = _mm_mul_ps(y1, inv_area);
+//        x1 = _mm_mul_ps(x1, inv_area);
+//
+//        DirectX::XMVECTOR q_vec;
+//        for (size_t ii = 0; ii < dwDimensonN; ii++)
+//        {
+//            q_vec = _mm_set_ps(0.f, pfND2[ii], pfND1[ii], pfND0[ii]);
+//
+//            if (!IsInZeroRange2(fNew2DArea))
+//            {
+//                y2 = _mm_mul_ps(q_vec, y1);
+//                x2 = _mm_mul_ps(q_vec, x1);
+//
+//                Ss[ii] = (y2[0] + y2[1] + y2[2]);
+//                St[ii] = (x2[0] + x2[1] + x2[2]);
+//            }
+//            else
+//            {
+//                if (q_vec[0] == q_vec[1] && q_vec[0] == q_vec[2])
+//                {
+//                    Ss[ii] = St[ii] = 0;
+//                }
+//                else
+//                {
+//                    Ss[ii] = St[ii] = FLT_MAX;
+//                }
+//            }
+//        }
+//#else
+////        float inv_area = 1.f / (fNew2DArea * 2.f);
+////        float y[] = {
+////            (pv2D1->y - pv2D2->y) * inv_area,
+////            (pv2D2->y - pv2D0->y) * inv_area,
+////            (pv2D0->y - pv2D1->y) * inv_area};
+////        float x[] = {
+////            (pv2D2->x - pv2D1->x) * inv_area,
+////            (pv2D0->x - pv2D2->x) * inv_area,
+////            (pv2D1->x - pv2D0->x) * inv_area};
+//
+//        float q[3];
+//        for (size_t ii = 0; ii < dwDimensonN; ii++)
+//        {
+//            q[0] = pfND0[ii];
+//            q[1] = pfND1[ii];
+//            q[2] = pfND2[ii];
+//
+//            if (!IsInZeroRange2(fNew2DArea))
+//            {
+////                Ss[ii] = q[0] * y[0] + q[1] * y[1] + q[2] * y[2];
+////                St[ii] = q[0] * x[0] + q[1] * x[1] + q[2] * x[2];
+//
+//                Ss[ii] = (q[0] * (pv2D1->y - pv2D2->y) + q[1] * (pv2D2->y - pv2D0->y) +
+//                          q[2] * (pv2D0->y - pv2D1->y)) /
+//                         (fNew2DArea * 2);
+//
+//                St[ii] = (q[0] * (pv2D2->x - pv2D1->x) + q[1] * (pv2D0->x - pv2D2->x) +
+//                          q[2] * (pv2D1->x - pv2D0->x)) /
+//                         (fNew2DArea * 2);
+//            }
+//            else
+//            {
+//                if (q[0] == q[1] && q[0] == q[2])
+//                {
+//                    Ss[ii] = St[ii] = 0;
+//                }
+//                else
+//                {
+//                    Ss[ii] = St[ii] = FLT_MAX;
+//                }
+//            }
+//        }
+//#endif
+//        return;
+//    }
 
 
 

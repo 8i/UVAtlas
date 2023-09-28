@@ -43,6 +43,8 @@
 #include "UVAtlas.h"
 #include "maxheap.hpp"
 
+#include <easy/profiler.h>
+
 using namespace Isochart;
 using namespace DirectX;
 
